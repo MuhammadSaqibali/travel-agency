@@ -177,8 +177,8 @@ export default function ServiceForm({ auth, clients }) {
             })
             .then((data) => {
                 if (data && data.success === true) {
-                    localStorage.removeItem("selectedClient");
-                    localStorage.removeItem("selectedService");
+                    // localStorage.removeItem("selectedClient");
+                    // localStorage.removeItem("selectedService");
                     window.location.href = "/ticket/form/fetch";
                 } else {
                     throw new Error("API response indicates failure.");

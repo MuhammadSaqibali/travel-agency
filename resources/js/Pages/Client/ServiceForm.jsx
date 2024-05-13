@@ -21,37 +21,37 @@ export default function ServiceForm({ auth, clients }) {
         airline_name: '',
         name: '', // Add trade_name field
     });
-    
-    
+
+
     const { data, setData, post, processing, errors } = useForm(formData);
 
     useEffect(() => {
         // const savedFormData = JSON.parse(localStorage.getItem('formData'));
         if (window.location.href.includes('back')) {
-            
+
             fetch(route('services.back'))
-            .then(response => response.json())
-            .then(function(r){
-                // console.log(r.data) 
-                setData(r.data)
-             })
+                .then(response => response.json())
+                .then(function (r) {
+                    // console.log(r.data) 
+                    setData(r.data)
+                })
             // setData(JSON.parse('{"service_type":"flight","passenger_number":"1","passenger_names":["ghjghj"],"domestic_international":"domestic","oneway_roundway":"oneway","from_location":"sadsad","to_location":"sadsad","departure_date":"2024-05-15","return_date":"","airline_name":"","name":"","trade_name":"Drew Boyle"}'));
         }
     }, []);
-    
+
 
     const [showSuccess, setShowSuccess] = useState(false);
     const [showError, setShowError] = useState(false);
     const [message, setMessage] = useState('');
-    const [selectedClient,setSelectedClient] =  useState(0);
+    const [selectedClient, setSelectedClient] = useState(0);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        localStorage.getItem('formData',{
+        localStorage.getItem('formData', {
             ...data,
             passenger_names: data.passenger_names, // Include passenger names in the request payload
         });
-        
-        
+
+
         post(route('services.store'), {
             data: {
                 ...data,
@@ -66,9 +66,9 @@ export default function ServiceForm({ auth, clients }) {
                 const tradeName = document.getElementById("trade_name").value;
                 const serviceType = document.getElementById("service_type").value;
                 setSelectedClient(tradeName);
-                localStorage.setItem('selectedClient',tradeName );
-                localStorage.setItem('selectedService',serviceType );
-               window.location.href = '/quotation/form/fetch';
+                localStorage.setItem('selectedClient', tradeName);
+                localStorage.setItem('selectedService', serviceType);
+                window.location.href = '/quotation/form/fetch';
 
             },
             onError: (errors) => {
@@ -86,45 +86,45 @@ export default function ServiceForm({ auth, clients }) {
         <AuthenticatedLayout user={auth.user}>
             <Head title="Service Request Form" />
             {auth.user.role_id == 1 && (
-            <nav style={{ marginBottom: '20px' }}>
-                <ul style={{ listStyle: 'none', paddingLeft: 120, margin: 0 }}>
-                    <li style={{ display: 'inline', marginRight: '10px' }}>
-                        <a href="/dashboard" style={{ textDecoration: 'none', color: 'black' }}>Home</a> /
-                    </li>
-                    <li style={{ display: 'inline', marginRight: '10px' }}>
-                        <a href="/services/form" style={{ textDecoration: 'none', color: 'black' }}>Services Form</a> /
-                    </li>
-                    <li style={{ display: 'inline', marginRight: '10px' }}>
-                        <a href="/quotation/form/fetch" style={{ textDecoration: 'none', color: 'black' }}>Quotation Form</a>
-                    </li>
-                </ul>
-            </nav>)}
+                <nav style={{ marginBottom: '20px' }}>
+                    <ul style={{ listStyle: 'none', paddingLeft: 120, margin: 0 }}>
+                        <li style={{ display: 'inline', marginRight: '10px' }}>
+                            <a href="/dashboard" style={{ textDecoration: 'none', color: 'black' }}>Home</a> /
+                        </li>
+                        <li style={{ display: 'inline', marginRight: '10px' }}>
+                            <a href="/services/form" style={{ textDecoration: 'none', color: 'black' }}>Services Form</a> /
+                        </li>
+                        <li style={{ display: 'inline', marginRight: '10px' }}>
+                            <a href="/quotation/form/fetch" style={{ textDecoration: 'none', color: 'black' }}>Quotation Form</a>
+                        </li>
+                    </ul>
+                </nav>)}
             {auth.user.role_id == 1 && (
 
-            <div className="flex justify-center items-center space-x-4">
-                 
-                <div className="flex items-center bg-green-500 px-4 py-2 rounded-xl">
-                    <span className="text-sm text-white font-semibold ">Step 1</span>
-                </div>
+                <div className="flex justify-center items-center space-x-4">
 
-                <div className="h-1 w-15 bg-green-500"></div>
+                    <div className="flex items-center bg-green-500 px-4 py-2 rounded-xl">
+                        <span className="text-sm text-white font-semibold ">Step 1</span>
+                    </div>
 
-               
-                <div className="flex items-center">
-                    <span className="text-sm font-semibold ml-2 bg-gray-400 text-white px-4 py-2 rounded-xl">Step 2</span>
-                </div>
-                <div className="h-1 w-15 bg-green-500"></div>
+                    <div className="h-1 w-15 bg-green-500"></div>
 
-               
-<div className="flex items-center">
-    <span className="text-sm font-semibold ml-2 bg-gray-400 text-white px-4 py-2 rounded-xl">Step 3</span>
-</div>
-<div className="h-1 w-15 bg-green-500"></div>
 
-               
-<div className="flex items-center">
-    <span className="text-sm font-semibold ml-2 bg-gray-400 text-white px-4 py-2 rounded-xl">Step 4</span>
-</div>
+                    <div className="flex items-center">
+                        <span className="text-sm font-semibold ml-2 bg-gray-400 text-white px-4 py-2 rounded-xl">Step 2</span>
+                    </div>
+                    <div className="h-1 w-15 bg-green-500"></div>
+
+
+                    <div className="flex items-center">
+                        <span className="text-sm font-semibold ml-2 bg-gray-400 text-white px-4 py-2 rounded-xl">Step 3</span>
+                    </div>
+                    <div className="h-1 w-15 bg-green-500"></div>
+
+
+                    <div className="flex items-center">
+                        <span className="text-sm font-semibold ml-2 bg-gray-400 text-white px-4 py-2 rounded-xl">Step 4</span>
+                    </div>
 
                 </div>)}
             <div className=' text-vermilion-700 bg-white container w-md-80 rounded-md shadow-sm p-4  mt-4'>
@@ -222,7 +222,7 @@ export default function ServiceForm({ auth, clients }) {
                                                 className="mt-1 block w-full rounded-md bg-white text-black"
                                                 style={{ border: '2px solid pink' }}
                                                 placeholder={`Passenger ${index + 1} Name`}
-                                                 
+
                                             />
                                         ))}
                                         {errors.passenger_names && <div className="text-red-600">{errors.passenger_names}</div>}
@@ -344,7 +344,7 @@ export default function ServiceForm({ auth, clients }) {
                                         {errors.return_date && <div className="text-red-600">{errors.return_date}</div>}
                                     </div>
                                 )}
- 
+
                             </div>
 
                         </>
@@ -352,7 +352,7 @@ export default function ServiceForm({ auth, clients }) {
 
                     <div className="flex items-center justify-end mt-4">
                         <PrimaryButton className="ms-4 bg-pink-600" disabled={processing}>
-                            Save  
+                            Save
                         </PrimaryButton>
                     </div>
                 </form>

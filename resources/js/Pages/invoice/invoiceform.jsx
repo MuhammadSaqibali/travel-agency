@@ -17,12 +17,12 @@ export default function Register({ auth }) {
         management_fee: "",
         cgst: "",
         sgst: "",
-        total:""
+        total:"",
+        clientName:"",
     });
 
-    
 
-
+    const selectedClient = localStorage.getItem("selectedClient");
     const [showSuccess, setShowSuccess] = useState(false);
     const [showError, setShowError] = useState(false);
     const [message, setMessage] = useState('');
@@ -120,6 +120,7 @@ export default function Register({ auth }) {
                                 style={{ border: '2px solid pink' }} // Set border style and color inline
                                 autoComplete="organization"
                                 onChange={(e) => setData('invoice_number', e.target.value)}
+                                onClick={(e) => setData('clientName', selectedClient)}
                                 required
                             />
 

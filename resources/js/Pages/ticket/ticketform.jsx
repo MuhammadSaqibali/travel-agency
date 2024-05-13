@@ -17,12 +17,14 @@ export default function Register({ auth }) {
         seat_number: "",
         flight: "",
         flight_class: "",
+        clientName:"",
     });
-
+    const selectedClient = localStorage.getItem("selectedClient");
+    
     const [showSuccess, setShowSuccess] = useState(false);
     const [showError, setShowError] = useState(false);
     const [message, setMessage] = useState('');
-
+    console.log(selectedClient);
     const submit = async (e) => {
         e.preventDefault();
     
@@ -114,9 +116,11 @@ export default function Register({ auth }) {
                                 className="mt-1 block w-full rounded-md bg-white text-black"
                                 style={{ border: '2px solid pink' }} // Set border style and color inline
                                 autoComplete="organization"
-                                onChange={(e) => setData('gate', e.target.value)}
+                                onChange={(e) => setData('gate', e.target.value,'client')}
+                                onClick={(e) => setData('clientName', selectedClient)}
                                 required
                             />
+                            
 
 
 
